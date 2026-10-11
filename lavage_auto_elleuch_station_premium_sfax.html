@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavage Auto Service Elleuch</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfeff',
+                            100: '#cffaff',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                            900: '#164e63',
+                        },
+                        dark: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px -5px rgba(6, 182, 212, 0.15);
+        }
+
+        /* Custom Before/After Comparison Container */
+        .ba-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            user-select: none;
+            touch-action: pan-y;
+        }
+
+        .ba-image-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+            border-right: 3px solid #06b6d4;
+        }
+
+        .ba-slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #06b6d4;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .ba-handle-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #06b6d4;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+        }
+
+        /* Pulsing Glow Effect */
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-car-wash"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight text-white block leading-none">
+                            Lavage Auto <span class="text-brand-400">Elleuch</span>
+                        </span>
+                        <span class="text-xs text-slate-400 font-medium tracking-wider">Sfax</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                    <a href="#accueil" class="hover:text-brand-400 transition-colors">Accueil</a>
+                    <a href="#tarifs" class="hover:text-brand-400 transition-colors">Tarifs & Estimateur</a>
+                    <a href="#services" class="hover:text-brand-400 transition-colors">Services</a>
+                    <a href="#avant-apres" class="hover:text-brand-400 transition-colors">Avant / Après</a>
+                    <a href="#avis" class="hover:text-brand-400 transition-colors">Avis Clients</a>
+                    <a href="#contact" class="hover:text-brand-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Status Badge & CTA -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <div id="live-status-badge" class="flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span>Ouvert • 08:00 - 19:00</span>
+                    </div>
+
+                    <button onclick="openBookingModal()" class="bg-gradient-to-r from-brand-500 to-cyan-500 hover:from-brand-600 hover:to-cyan-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center space-x-2 transform active:scale-95">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Réserver</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center space-x-3">
+                    <button onclick="openBookingModal()" class="bg-brand-500 text-slate-950 p-2.5 rounded-lg text-sm font-bold">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                    </button>
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-2 text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#accueil" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium border-b border-slate-800/50">Accueil</a>
+            <a href="#tarifs" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium border-b border-slate-800/50">Tarifs & Estimateur</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium border-b border-slate-800/50">Services</a>
+            <a href="#avant-apres" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium border-b border-slate-800/50">Avant / Après</a>
+            <a href="#avis" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium border-b border-slate-800/50">Avis Clients</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-brand-400 font-medium">Contact</a>
+            
+            <div class="pt-2 flex flex-col space-y-2">
+                <a href="tel:+21629930613" class="w-full text-center py-2.5 rounded-xl bg-slate-800 text-brand-400 border border-brand-500/30 font-semibold flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+216 29 930 613</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="accueil" class="relative py-20 lg:py-28 overflow-hidden">
+        <!-- Background Decorative Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-500/15 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 right-10 w-[400px] h-[300px] bg-cyan-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-brand-400 text-xs sm:text-sm font-semibold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Station de Lavage Haute Précision & Detailing à Sfax</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white">
+                        Offrez à votre véhicule <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-cyan-300">l'éclat du neuf</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Lavage haute pression, nettoyage intégral de tapisserie à la vapeur, rénovation d'optiques de phares, et lustrage professionnel au **Km 3 Route Menzel Chaker, Sfax**.
+                    </p>
+
+                    <!-- CTA Actions -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <button onclick="openBookingModal()" class="w-full sm:w-auto bg-gradient-to-r from-brand-500 to-cyan-400 hover:from-brand-600 hover:to-cyan-500 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-brand-500/30 transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-3 text-base">
+                            <i class="fa-solid fa-car-wash text-lg"></i>
+                            <span>Réserver un Lavage</span>
+                        </button>
+
+                        <a href="#tarifs" class="w-full sm:w-auto bg-slate-800/90 hover:bg-slate-800 text-white font-semibold px-7 py-4 rounded-xl border border-slate-700 hover:border-slate-600 transition-all text-center flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-calculator text-brand-400"></i>
+                            <span>Consulter nos Tarifs</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Features Bar -->
+                    <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">10+</div>
+                            <div class="text-xs text-slate-400">Ans d'Expertise</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-brand-400">100%</div>
+                            <div class="text-xs text-slate-400">Satisfaction Garantis</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">15k+</div>
+                            <div class="text-xs text-slate-400">Voitures Lavées</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-3xl overflow-hidden glass-card p-3 border border-slate-700/60 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Lavage auto professionnel Sfax" 
+                             class="w-full h-80 sm:h-96 object-cover rounded-2xl"
+                             onerror="this.src='https://placehold.co/800x600/0f172a/06b6d4?text=Lavage+Auto+Elleuch'">
+                        
+                        <!-- Floating Badge on Hero Image -->
+                        <div class="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-xl border border-white/10 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-droplet-degreaser"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white">Produits Biodégradables</h4>
+                                    <p class="text-xs text-slate-400">Protecteurs de carrosserie & peinture</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded bg-brand-500/20 text-brand-400">Haute Pression</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PRICING & ESTIMATOR SECTION -->
+    <section id="tarifs" class="py-20 bg-slate-900/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Tarification Transparente</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Estimateur Sur-Mesure</h2>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Sélectionnez votre catégorie de véhicule pour adapter instantanément les tarifs de nos formules de lavage.
+                </p>
+
+                <!-- Vehicle Category Selector Tabs -->
+                <div class="inline-flex p-1.5 rounded-2xl bg-slate-950 border border-slate-800 space-x-2 mt-4">
+                    <button onclick="setVehicleCategory('citadine')" id="btn-citadine" class="vehicle-tab font-semibold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all bg-brand-500 text-slate-950 shadow-md">
+                        <i class="fa-solid fa-car-side mr-1.5"></i> Citadine / Compacte
+                    </button>
+                    <button onclick="setVehicleCategory('berline')" id="btn-berline" class="vehicle-tab font-semibold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-car mr-1.5"></i> Berline
+                    </button>
+                    <button onclick="setVehicleCategory('suv')" id="btn-suv" class="vehicle-tab font-semibold text-xs sm:text-sm px-4 sm:px-6 py-2.5 rounded-xl transition-all text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-truck-pickup mr-1.5"></i> SUV / 4x4 / Pick-Up
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Package 1: Express -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-slate-800 text-brand-400 flex items-center justify-center text-xl mb-4 border border-slate-700">
+                            <i class="fa-solid fa-shower"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Lavage Express</h3>
+                        <p class="text-xs text-slate-400 mb-4">Parfait pour un entretien rapide et régulier extérieur.</p>
+                        
+                        <div class="mb-6">
+                            <span class="text-3xl font-black text-white" id="price-express">20</span>
+                            <span class="text-brand-400 font-bold ml-1">TND</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-slate-300 border-t border-slate-800 pt-4 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Lavage carrosserie haute pression</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Shampoing carrosserie brillant</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Nettoyage express jantes & pneus</li>
+                            <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark mr-2 text-slate-600"></i> Dépoussiérage habitacle</li>
+                            <li class="flex items-center text-slate-500"><i class="fa-solid fa-xmark mr-2 text-slate-600"></i> Nettoyage tapis</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="selectPackageAndBook('Lavage Express')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl border border-slate-700 transition-colors">
+                        Choisir Express
+                    </button>
+                </div>
+
+                <!-- Package 2: Intégral (Popular) -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden border-2 border-brand-500/50 shadow-xl shadow-brand-500/10">
+                    <div class="absolute -right-12 top-6 bg-brand-500 text-slate-950 font-black text-[10px] uppercase tracking-wider py-1 px-12 rotate-45 shadow-sm">
+                        Populaire
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500 text-slate-950 flex items-center justify-center text-xl mb-4 font-extrabold">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Lavage complet</h3>
+                        <p class="text-xs text-slate-400 mb-4">Lavage complet intérieur & extérieur méticuleux.</p>
+                        
+                        <div class="mb-6">
+                            <span class="text-3xl font-black text-white" id="price-integral">50</span>
+                            <span class="text-brand-400 font-bold ml-1">TND</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-slate-300 border-t border-slate-800 pt-4 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Tout du Lavage Express</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Aspiration profonde sièges & coffre</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Nettoyage tableau de bord & vitres</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Nettoyage des tapis & contours portes</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Finition parfum d'ambiance</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="selectPackageAndBook('Grand Lavage Intégral')" class="w-full bg-gradient-to-r from-brand-500 to-cyan-400 hover:from-brand-600 hover:to-cyan-500 text-slate-950 font-black py-3 rounded-xl transition-all shadow-md">
+                        Réserver Intégral
+                    </button>
+                </div>
+
+                    <button onclick="selectPackageAndBook('Detailing & Polissage')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl border border-slate-700 transition-colors">
+                        Choisir Detailing
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SHOWCASE -->
+    <section id="services" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Expertise Technique</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Nos Services Spécialisés</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Chaque recoin de votre automobile traité avec des outils professionnels.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Lavage Châssis Sous-Caisse</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Élimination complète du sel, du sable de Sfax et du cambouis accumulés sous votre véhicule avec buse rotative sous haute pression.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Rénovation Optiques Phares</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Restauration des phares jaunis ou ternis par le soleil. Ponçage à l'eau & polissage pour retrouver une transparence maximale et sécurisée.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Polissage & Lustrage carrosserie</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Atténuation des micro-rayures et restauration de la brillance d'origine de la peinture avec produits allemands haut de gamme.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-chair"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Traitement Cuir & Tissus</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Nourrissage des cuirs pour éviter le craquellement et détachage en profondeur des sièges en tissu avec séchage rapide.
+                    </p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Désinfection Ozone & Climatisation</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Élimination bactérienne à 99.9% et neutralisation des odeurs de cigarette, d'humidité et d'animaux dans les conduits d'aération.
+                    </p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-4 border border-brand-500/20">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Protection Cire & Céramique</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Application d'une couche protectrice déperlante anti-poussière facilitant les futurs lavages et protégeant contre le soleil tunisien.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER INTERACTIVE COMPARISON -->
+    <section id="avant-apres" class="py-20 bg-slate-900/40 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Résultats Visuels</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Avant / Après nos interventions</h2>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Faites glisser le curseur pour observer la transformation spectaculaire réalisée au centre Lavage Auto Elleuch.
+                </p>
+            </div>
+
+            <!-- Before / After Slider Box -->
+            <div class="max-w-4xl mx-auto glass-panel p-3 rounded-2xl border border-slate-700 shadow-2xl">
+                <div id="ba-slider" class="ba-container h-[320px] sm:h-[480px] w-full">
+                    
+                    <!-- BEFORE IMAGE (Dirty) -->
+                    <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Avant lavage" 
+                         class="absolute top-0 left-0 w-full h-full object-cover filter brightness-75 contrast-125 sepia-[0.25]"
+                         onerror="this.src='https://placehold.co/1000x600/1e293b/94a3b8?text=AVANT+-+Véhicule+Sale'">
+                    <span class="absolute top-4 left-4 bg-red-500/80 backdrop-blur text-white text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-lg z-10 shadow">
+                        Avant Lavage
+                    </span>
+
+                    <!-- AFTER IMAGE (Clean & Shiny) -->
+                    <div id="ba-after-layer" class="ba-image-after">
+                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Après lavage detailing" 
+                             class="absolute top-0 left-0 h-full object-cover max-w-none"
+                             id="ba-after-img"
+                             onerror="this.src='https://placehold.co/1000x600/0891b2/ffffff?text=APRÈS+-+Finition+Miroir'">
+                        <span class="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur text-slate-950 text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-lg z-10 shadow">
+                            Après Detailing
+                        </span>
+                    </div>
+
+                    <!-- SLIDER DIVIDER HANDLE -->
+                    <div id="ba-handle" class="ba-slider-handle">
+                        <div class="ba-handle-button">
+                            <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-6 text-center text-xs text-slate-400">
+                <i class="fa-solid fa-hand-pointer mr-1 text-brand-400"></i> Cliquez ou glissez horizontalement sur la photo pour ajuster le comparatif.
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS & LIVE FEEDBACK -->
+    <section id="avis" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Avis Vérifiés</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">Ce que disent nos clients à Sfax</h2>
+                </div>
+
+                <div class="mt-4 md:mt-0 flex items-center space-x-4">
+                    <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl flex items-center space-x-3">
+                        <div class="text-yellow-400 text-lg">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="text-white font-extrabold text-lg">4.9 / 5</span>
+                        <span class="text-slate-400 text-xs">(50+ avis)</span>
+                    </div>
+
+                    <button onclick="toggleReviewModal()" class="bg-slate-800 hover:bg-slate-700 text-brand-400 font-bold px-4 py-2.5 rounded-xl border border-brand-500/30 text-sm transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Laisser un Avis</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reviews Grid -->
+            <div id="reviews-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT & MAP SECTION -->
+    <section id="contact" class="py-20 bg-slate-900/80 relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <!-- Contact Info & Opening Hours -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider">Trouvez-Nous</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">Station Lavage Auto Elleuch</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+                            PPHW+XPP, Sfax
+                        </p>
+                    </div>
+
+                    <!-- Direct Quick Contact Cards -->
+                    <div class="space-y-4">
+                        <a href="tel:+21621415851" class="glass-card p-4 rounded-xl flex items-center justify-between border border-slate-800 hover:border-brand-500/40 group">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 block font-medium">Téléphone Direct</span>
+                                    <span class="text-sm font-bold text-white group-hover:text-brand-400 transition-colors">+216 21 415 851</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-600 group-hover:text-brand-400"></i>
+                        </a>
+
+                        <a href="https://wa.me/21629930613?text=Bonjour%20Lavage%20Auto%20Elleuch,%20je%20souhaite%20obtenir%20des%20informations" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-between border border-slate-800 hover:border-emerald-500/40 group">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[11px] text-slate-400 block font-medium">WhatsApp Direct</span>
+                                    <span class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Envoyer un message</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-600 group-hover:text-emerald-400"></i>
+                        </a>
+
+                        <div class="glass-card p-4 rounded-xl flex items-center space-x-4 border border-slate-800">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-slate-400 block font-medium">Adresse</span>
+                                <span class="text-xs font-bold text-white">Km 3 Route Menzel Chaker, Sfax, Tunisie</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opening Hours Table -->
+                    <div class="glass-panel p-5 rounded-2xl border border-slate-800">
+                        <h4 class="text-sm font-bold text-white mb-3 flex items-center">
+                            <i class="fa-solid fa-clock text-brand-400 mr-2"></i> Horaires d'Ouverture
+                        </h4>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex justify-between py-1 border-b border-slate-800/80 text-slate-300">
+                                <span>Lundi - Samedi</span>
+                                <span class="font-bold text-brand-400">08:00 - 17:00</span>
+                            </div>
+                            <div class="flex justify-between py-1 text-slate-300">
+                                <span>Dimanche</span>
+                                <span class="font-bold text-brand-400">Fermée</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Contact Form & Embedded Location Mock -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-slate-800">
+                    <h3 class="text-xl font-extrabold text-white mb-2">Envoyez-nous un Message</h3>
+                    <p class="text-xs text-slate-400 mb-6">Une question sur nos prestations detailing ou un devis spécifique pour flotte auto ? Contactez-nous.</p>
+
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Votre Nom</label>
+                                <input type="text" required placeholder="Ex: Mohamed Elleuch" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Téléphone</label>
+                                <input type="tel" required placeholder="Ex: 21 415 851" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Type de véhicule / Service souhaité</label>
+                            <select class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors">
+                                <option>Lavage Express / Intégral</option>
+                                <option>Nettoyage Tapisserie & Sièges</option>
+                                <option>Polissage & Lustrage Detailing</option>
+                                <option>Rénovation Optiques Phares</option>
+                                <option>Autre demande spéciale</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Votre Message</label>
+                            <textarea rows="4" required placeholder="Saisissez votre message..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-500 transition-colors resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-brand-500 to-cyan-400 hover:from-brand-600 hover:to-cyan-500 text-slate-950 font-extrabold py-3.5 rounded-xl shadow-lg transition-all text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Envoyer le Message</span>
+                        </button>
+                    </form>
+
+                    <!-- Google Maps Route Button -->
+                    <div class="mt-8 pt-6 border-t border-slate-800 text-center">
+                        <a href="https://www.google.com/maps/place/Lavage+Auto+Elleuch/@34.7299625,10.7468281,17z/data=!3m1!4b1!4m6!3m5!1s0x13002d0065fe9963:0x1d62b8faa5ee7631!8m2!3d34.7299625!4d10.7468281!16s%2Fg%2F11ynkpr8xc?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="inline-flex items-center space-x-2 text-xs font-semibold text-brand-400 hover:text-cyan-300 transition-colors">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                            <span>Ouvrir l'itinéraire GPS Google Maps vers la Station</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-500 text-slate-950 flex items-center justify-center font-black text-base">
+                    <i class="fa-solid fa-car-wash"></i>
+                </div>
+                <span class="font-extrabold text-white text-sm">Lavage Auto Elleuch - Sfax</span>
+            </div>
+
+            <p>© 2026 Lavage Auto Elleuch. Tous droits réservés.</p>
+
+            <div class="flex space-x-4 text-base">
+                <a href="https://wa.me/21621415851" target="_blank" class="text-slate-400 hover:text-emerald-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:+21621415851" class="text-slate-400 hover:text-brand-400 transition-colors"><i class="fa-solid fa-phone"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOOKING WIZARD MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel max-w-lg w-full rounded-3xl border border-slate-700 p-6 sm:p-8 relative shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="mb-6">
+                <span class="text-brand-400 text-xs font-bold uppercase tracking-wider">Réservation Rapide en Ligne</span>
+                <h3 class="text-2xl font-black text-white">Réserver un Lavage</h3>
+            </div>
+
+            <!-- Step Progress Indicator -->
+            <div class="flex items-center justify-between mb-8 relative">
+                <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-800 -z-10"></div>
+                
+                <div id="step-dot-1" class="w-8 h-8 rounded-full bg-brand-500 text-slate-950 font-bold text-xs flex items-center justify-center">1</div>
+                <div id="step-dot-2" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center justify-center">2</div>
+                <div id="step-dot-3" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 font-bold text-xs flex items-center justify-center">3</div>
+            </div>
+
+            <!-- FORM WIZARD CONTENT -->
+            <form id="booking-wizard-form" onsubmit="submitBooking(event)">
+                
+                <!-- STEP 1: Choice of Service & Car -->
+                <div id="booking-step-1" class="space-y-4">
+                    <h4 class="text-sm font-bold text-slate-200">Étape 1 : Service & Catégorie Véhicule</h4>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Catégorie de véhicule</label>
+                        <select id="modal-car-category" onchange="updateModalPricePreview()" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                            <option value="citadine">Citadine / Compacte</option>
+                            <option value="berline">Berline</option>
+                            <option value="suv">SUV / 4x4 / Pick-Up</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Formule / Service</label>
+                        <select id="modal-service-package" onchange="updateModalPricePreview()" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                            <option value="Lavage Express">Lavage Express</option>
+                            <option value="Grand Lavage Intégral" selected>Grand Lavage Intégral</option>
+                            <option value="Nettoyage Tapisserie">Nettoyage Tapisserie & Sièges</option>
+                            <option value="Detailing & Polissage">Detailing & Polissage</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Tarif estimé :</span>
+                        <span id="modal-price-display" class="text-xl font-black text-brand-400">25 TND</span>
+                    </div>
+
+                    <button type="button" onclick="goToStep(2)" class="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">
+                        Suivant : Date & Heure <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- STEP 2: Date & Time Slot -->
+                <div id="booking-step-2" class="space-y-4 hidden">
+                    <h4 class="text-sm font-bold text-slate-200">Étape 2 : Date & Créneau Horaire</h4>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Date souhaitée</label>
+                        <input type="date" id="booking-date" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Créneau horaire disponible</label>
+                        <div class="grid grid-cols-3 gap-2" id="time-slots">
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">08:30</button>
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">10:00</button>
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">11:30</button>
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">14:00</button>
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">15:30</button>
+                            <button type="button" onclick="selectSlot(this)" class="time-slot-btn py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:border-brand-500">17:00</button>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3 pt-2">
+                        <button type="button" onclick="goToStep(1)" class="w-1/3 bg-slate-800 text-slate-300 font-bold py-3 rounded-xl text-xs">Retour</button>
+                        <button type="button" onclick="goToStep(3)" class="w-2/3 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">
+                            Suivant : Vos Infos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Customer Info -->
+                <div id="booking-step-3" class="space-y-4 hidden">
+                    <h4 class="text-sm font-bold text-slate-200">Étape 3 : Coordonnées de contact</h4>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Nom complet</label>
+                        <input type="text" id="booking-name" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Numéro Téléphone (Sfax / Tunisie)</label>
+                        <input type="tel" id="booking-phone" required class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Immatriculation / Modèle de la voiture (optionnel)</label>
+                        <input type="text" id="booking-car-model" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <div class="flex space-x-3 pt-2">
+                        <button type="button" onclick="goToStep(2)" class="w-1/3 bg-slate-800 text-slate-300 font-bold py-3 rounded-xl text-xs">Retour</button>
+                        <button type="submit" class="w-2/3 bg-gradient-to-r from-brand-500 to-cyan-400 text-slate-950 font-extrabold py-3 rounded-xl transition-all text-xs uppercase tracking-wider shadow-lg">
+                            Confirmer la Réservation
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- CONFIRMATION SUMMARY STATE -->
+            <div id="booking-confirmation" class="hidden text-center py-6 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto border border-emerald-500/40">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Réservation Confirmée !</h3>
+                <p class="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
+                    Merci <span id="conf-name" class="font-bold text-white"></span>. Votre rendez-vous est pré-enregistré pour le <span id="conf-date" class="font-bold text-brand-400"></span> au centre <span class="font-bold">Lavage Auto Elleuch Sfax</span>.
+                </p>
+
+                <div class="bg-slate-900 p-4 rounded-xl text-left text-xs space-y-2 border border-slate-800">
+                    <div class="flex justify-between"><span class="text-slate-400">Code Réservation:</span> <span id="conf-code" class="font-mono text-brand-400 font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Service:</span> <span id="conf-service" class="text-white font-bold"></span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Téléphone:</span> <span id="conf-phone" class="text-white"></span></div>
+                </div>
+
+                <button onclick="closeBookingModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl text-xs">
+                    Fermer la fenêtre
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ADD REVIEW MODAL -->
+    <div id="review-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-slate-700 p-6 relative shadow-2xl">
+            <button onclick="toggleReviewModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-xl font-black text-white mb-1">Votre Avis Compte</h3>
+            <p class="text-xs text-slate-400 mb-4">Partagez votre expérience au lavage auto Elleuch à Sfax.</p>
+
+            <form onsubmit="submitNewReview(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Votre Nom</label>
+                    <input type="text" id="rev-name" required placeholder="Ex: Anis B." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Note (Étoiles)</label>
+                    <div class="flex space-x-2 text-xl text-yellow-400" id="star-rating-selector">
+                        <i class="fa-solid fa-star cursor-pointer" onclick="setStarRating(1)"></i>
+                        <i class="fa-solid fa-star cursor-pointer" onclick="setStarRating(2)"></i>
+                        <i class="fa-solid fa-star cursor-pointer" onclick="setStarRating(3)"></i>
+                        <i class="fa-solid fa-star cursor-pointer" onclick="setStarRating(4)"></i>
+                        <i class="fa-solid fa-star cursor-pointer" onclick="setStarRating(5)"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Votre Avis</label>
+                    <textarea id="rev-comment" rows="3" required placeholder="Donnez votre impression..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider">
+                    Publier l'Avis
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Pricing Data structure per vehicle category (in TND)
+        const PRICING_DATA = {
+            citadine: { express: 12, integral: 25, tapisserie: 70, detailing: 150 },
+            berline:  { express: 15, integral: 30, tapisserie: 90, detailing: 180 },
+            suv:      { express: 20, integral: 40, tapisserie: 120, detailing: 230 }
+        };
+
+        let currentCategory = 'citadine';
+        let selectedTimeSlot = '10:00';
+        let reviewStarCount = 5;
+
+        // Initialize default dates
+        window.onload = function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('booking-date').value = today;
+            initBeforeAfterSlider();
+        };
+
+        // Switch Vehicle Category in Pricing Section
+        function setVehicleCategory(category) {
+            currentCategory = category;
+            
+            // Update Tab styles
+            document.querySelectorAll('.vehicle-tab').forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-slate-950', 'shadow-md');
+                btn.classList.add('text-slate-400');
+            });
+
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-brand-500', 'text-slate-950', 'shadow-md');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            // Update Price Cards
+            const data = PRICING_DATA[category];
+            document.getElementById('price-express').textContent = data.express;
+            document.getElementById('price-integral').textContent = data.integral;
+            document.getElementById('price-tapisserie').textContent = data.tapisserie;
+            document.getElementById('price-detailing').textContent = data.detailing;
+
+            // Sync with modal
+            document.getElementById('modal-car-category').value = category;
+            updateModalPricePreview();
+        }
+
+        // Before/After Interactive Comparison Slider Logic
+        function initBeforeAfterSlider() {
+            const container = document.getElementById('ba-slider');
+            const handle = document.getElementById('ba-handle');
+            const afterLayer = document.getElementById('ba-after-layer');
+            const afterImg = document.getElementById('ba-after-img');
+
+            if(!container || !handle || !afterLayer) return;
+
+            let isDragging = false;
+
+            function updatePosition(x) {
+                const rect = container.getBoundingClientRect();
+                let posX = x - rect.left;
+                if (posX < 0) posX = 0;
+                if (posX > rect.width) posX = rect.width;
+
+                const percentage = (posX / rect.width) * 100;
+                afterLayer.style.width = `${percentage}%`;
+                handle.style.left = `${percentage}%`;
+                afterImg.style.width = `${rect.width}px`;
+            }
+
+            // Mouse Events
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updatePosition(e.clientX);
+            });
+
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                updatePosition(e.clientX);
+            });
+
+            // Touch Events for Mobile
+            container.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                if (e.touches[0]) updatePosition(e.touches[0].clientX);
+            });
+
+            window.addEventListener('touchend', () => isDragging = false);
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                if (e.touches[0]) updatePosition(e.touches[0].clientX);
+            });
+
+            // Set initial dimensions
+            afterImg.style.width = `${container.getBoundingClientRect().width}px`;
+        }
+
+        // Booking Modal Wizard Logic
+        function openBookingModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+            goToStep(1);
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+            document.getElementById('booking-wizard-form').classList.remove('hidden');
+            document.getElementById('booking-confirmation').classList.add('hidden');
+        }
+
+        function selectPackageAndBook(packageName) {
+            document.getElementById('modal-service-package').value = packageName;
+            updateModalPricePreview();
+            openBookingModal();
+        }
+
+        function updateModalPricePreview() {
+            const category = document.getElementById('modal-car-category').value;
+            const service = document.getElementById('modal-service-package').value;
+            const display = document.getElementById('modal-price-display');
+
+            let price = 25;
+            const rates = PRICING_DATA[category];
+
+            if(service.includes('Express')) price = rates.express;
+            else if(service.includes('Intégral')) price = rates.integral;
+            else if(service.includes('Tapisserie')) price = rates.tapisserie;
+            else if(service.includes('Detailing')) price = rates.detailing;
+
+            display.textContent = `${price} TND`;
+        }
+
+        function goToStep(stepNumber) {
+            document.getElementById('booking-step-1').classList.add('hidden');
+            document.getElementById('booking-step-2').classList.add('hidden');
+            document.getElementById('booking-step-3').classList.add('hidden');
+
+            document.getElementById(`booking-step-${stepNumber}`).classList.remove('hidden');
+
+            // Update Progress Dots
+            for(let i=1; i<=3; i++) {
+                const dot = document.getElementById(`step-dot-${i}`);
+                if(i <= stepNumber) {
+                    dot.classList.add('bg-brand-500', 'text-slate-950');
+                    dot.classList.remove('bg-slate-800', 'text-slate-400');
+                } else {
+                    dot.classList.remove('bg-brand-500', 'text-slate-950');
+                    dot.classList.add('bg-slate-800', 'text-slate-400');
+                }
+            }
+        }
+
+        function selectSlot(button) {
+            document.querySelectorAll('.time-slot-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-slate-950', 'font-bold');
+                btn.classList.add('bg-slate-900', 'text-slate-300');
+            });
+            button.classList.add('bg-brand-500', 'text-slate-950', 'font-bold');
+            selectedTimeSlot = button.textContent;
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('booking-name').value;
+            const phone = document.getElementById('booking-phone').value;
+            const service = document.getElementById('modal-service-package').value;
+            const date = document.getElementById('booking-date').value;
+
+            // Generate Booking Ref Code
+            const refCode = 'LE-' + Math.floor(1000 + Math.random() * 9000);
+
+            document.getElementById('conf-name').textContent = name;
+            document.getElementById('conf-date').textContent = `${date} à ${selectedTimeSlot}`;
+            document.getElementById('conf-code').textContent = refCode;
+            document.getElementById('conf-service').textContent = service;
+            document.getElementById('conf-phone').textContent = phone;
+
+            document.getElementById('booking-wizard-form').classList.add('hidden');
+            document.getElementById('booking-confirmation').classList.remove('hidden');
+        }
+
+        // Contact Form Submission
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alertToast("Message envoyé avec succès ! Lavage Auto Elleuch vous recontactera rapidement.");
+            e.target.reset();
+        }
+
+        // Review Submission Logic
+        function toggleReviewModal() {
+            const modal = document.getElementById('review-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function setStarRating(rating) {
+            reviewStarCount = rating;
+            const stars = document.querySelectorAll('#star-rating-selector i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.className = 'fa-solid fa-star cursor-pointer';
+                } else {
+                    star.className = 'fa-regular fa-star cursor-pointer';
+                }
+            });
+        }
+
+        function submitNewReview(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value;
+            const comment = document.getElementById('rev-comment').value;
+
+            const container = document.getElementById('reviews-container');
+            const newCard = document.createElement('div');
+            newCard.className = 'glass-card rounded-2xl p-6 flex flex-col justify-between border-2 border-brand-500/40';
+            
+            let starsHtml = '';
+            for(let i=0; i<reviewStarCount; i++) starsHtml += '<i class="fa-solid fa-star"></i>';
+
+            newCard.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="text-yellow-400 text-sm">${starsHtml}</div>
+                        <span class="text-[11px] text-brand-400 font-bold">À l'instant</span>
+                    </div>
+                    <p class="text-xs text-slate-300 italic leading-relaxed">"${comment}"</p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-500 text-slate-950 font-black flex items-center justify-center text-xs">
+                        ${name.substring(0, 2).toUpperCase()}
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">${name}</h4>
+                        <span class="text-[10px] text-slate-400">Avis vérifié</span>
+                    </div>
+                </div>
+            `;
+
+            container.prepend(newCard);
+            toggleReviewModal();
+            alertToast("Merci pour votre avis !");
+            e.target.reset();
+        }
+
+        // Custom Notification Toast
+        function alertToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 bg-brand-500 text-slate-950 font-bold px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-2 text-xs transition-all transform translate-y-full';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> <span>${message}</span>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.classList.remove('translate-y-full'), 100);
+            setTimeout(() => {
+                toast.classList.add('translate-y-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
